@@ -48,11 +48,11 @@ import org.apache.log4j.spi.ThrowableInformation;
 	private HttpClient client;
 
 	public CouchAppender() {
-		client = new DefaultHttpClient();
 	}
 
 	protected void append(LoggingEvent event) {
 
+		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(couchDbUrl);
 
 		JSONObject obj = new JSONObject();
