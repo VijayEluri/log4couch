@@ -46,6 +46,8 @@ import org.apache.log4j.spi.ThrowableInformation;
 
 	private String couchDbUrl;
 	private HttpClient client;
+	private String host = "DEFAULT_HOST";
+	private String process = "DEFAULT_PROCESS";
 
 	public CouchAppender() {
 	}
@@ -57,6 +59,9 @@ import org.apache.log4j.spi.ThrowableInformation;
 
 		JSONObject obj = new JSONObject();
 
+		obj.put( "host", host );
+		obj.put( "process", process);
+		
 		if (event.getLevel() != null) {
 			int level = event.getLevel().toInt();
 			obj.put("level", new Integer(level));
@@ -123,4 +128,22 @@ import org.apache.log4j.spi.ThrowableInformation;
 		this.couchDbUrl = couchDbUrl;
 	}
 
+	public String getHost() {
+		return host;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+	public String getProcess() {
+		return process;
+	}
+
+	public void setProcess(String process) {
+		this.process = process;
+	}
+	
+	
+	
 }
