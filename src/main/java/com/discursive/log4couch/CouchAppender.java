@@ -71,14 +71,14 @@ import org.apache.log4j.spi.ThrowableInformation;
 			LocationInfo loc = event.getLocationInformation();
 
 			JSONObject locObj = new JSONObject();
-			locObj.put("class name", loc.getClassName());
-			locObj.put("file name", loc.getFileName());
-			locObj.put("method name", loc.getMethodName());
-			locObj.put("line number", loc.getLineNumber());
+			locObj.put("className", loc.getClassName());
+			locObj.put("fileName", loc.getFileName());
+			locObj.put("methodName", loc.getMethodName());
+			locObj.put("lineNumber", loc.getLineNumber());
 			obj.put("location", locObj);
 		}
 
-		obj.put("logger name", event.getLoggerName());
+		obj.put("loggerName", event.getLoggerName());
 
 		obj.put("message", event.getRenderedMessage());
 
@@ -92,7 +92,7 @@ import org.apache.log4j.spi.ThrowableInformation;
 			String tMessage = t.getMessage();
 
 			JSONObject tObj = new JSONObject();
-			tObj.put("class name", t.getClass().getName());
+			tObj.put("className", t.getClass().getName());
 			tObj.put("message", tMessage);
 			tObj.put("information", StringUtils.join(Arrays.asList(thr
 					.getThrowableStrRep()), "\n"));
