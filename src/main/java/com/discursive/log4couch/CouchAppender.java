@@ -14,7 +14,35 @@ import org.apache.log4j.spi.LocationInfo;
 import org.apache.log4j.spi.LoggingEvent;
 import org.apache.log4j.spi.ThrowableInformation;
 
-public class CouchAppender extends AppenderSkeleton {
+/**
+ * A Log4J appender that creates a document in CouchDB.  This appender
+ * is used to create a document in a CouchDB database, and is
+ * recommended to use as a place to post errors messages and
+ * exceptions.  This appender is not optimized in any way for
+ * performance, and will simply print a stack trace to Standard Out if
+ * CouchDB is not available.  To configure this appender in a
+ * log4j.properties, add the following lines:
+ *
+ * log4j.appender.COUCH=com.discursive.log4couch.CouchAppender
+ * log4j.appender.COUCH.CouchDbUrl=http://localhost:5984/error-log
+ * log4j.appender.COUCH.threshold=ERROR
+ *
+ * The appender is going to POST a JSON document that represents a
+ * logging event to the URL provided.  If you have configured this
+ * properly, this will result in a new document in the specified
+ * database.  In the example shown above, this will result in a new
+ * document being stored to the error-log database for every logging
+ * event with a level of ERROR or higher.
+ *
+ * Note: The threshold line is especially important as the appender hasn't
+ * been optimized for performance.  You do not want this appender to
+ * be involved with every logging statement (it will make your program
+ * crawl to a halt).  This appender was created as a way to record and
+ * log exceptions in a production environment in CouchDB for offline
+ * analysis.
+ *
+ */
+  public class CouchAppender extends AppenderSkeleton {
 
 	private String couchDbUrl;
 	private HttpClient client;
